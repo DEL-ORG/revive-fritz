@@ -1,9 +1,0 @@
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: {{ .Values.environment.review02.name }}
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: {{- include "expresso-shop-reviews.selectorLabels_02" . | nindent 4 }}
