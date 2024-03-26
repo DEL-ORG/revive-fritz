@@ -2,9 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello1') {
+        stage('Test golang') {
+	      agent {
+            docker {
+              image 'golang:1.20.1'
+              args '-u 0:0'
+            }
+           }
             steps {
-                echo 'Hello World'
+                sh '''
+            cd $WORKSPACE/REVIVE/src/catalog/
+            go test
+                '''
             }
         }
 
@@ -53,7 +62,7 @@ pipeline {
         }
         unstable {
             slackSend color: '#ECB22E',
-            channel: 'terraform', 
+            channel: 'del-uk', 
             message: "*Alpha Project Build Status*" +
             "\n Project Name: Alpha" +
             "\n Job Name: ${env.JOB_NAME}" +
