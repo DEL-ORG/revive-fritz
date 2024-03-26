@@ -1,1 +1,1 @@
-# revive-fritz
+# S6-PROJECTS
