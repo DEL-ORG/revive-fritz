@@ -17,28 +17,35 @@ pipeline {
     //        }
     //    }
 
-        stage('Test maven-cart') {
-	     agent {
+       //stage('Test maven-cart') {
+	   // agent {
+       //    docker {
+       //      image 'maven:3.8.7-openjdk-18'
+       //    }
+       //   }
+       //    steps {
+       //        sh '''
+       //    cd $WORKSPACE/REVIVE/src/cart/
+       //    mvn  test  -Dmaven.test.skip=true --quiet 
+
+       //        '''
+       //    }
+       //}
+
+
+        stage('Test maven-orders') {
+	      agent {
             docker {
               image 'maven:3.8.7-openjdk-18'
             }
            }
             steps {
                 sh '''
-            cd $WORKSPACE/REVIVE/src/cart/
-            mvn  test  -Dmaven.test.skip=true --quiet 
-
+            cd $WORKSPACE/REVIVE/src/orders/
+            mvn   test -Dmaven.test.skip=true --quiet 
                 '''
             }
         }
-
-
-        stage('Hello2') {
-            steps {
-                echo 'Hello World'
-            }
-        }
-
 
         stage('Hello3') {
             steps {
