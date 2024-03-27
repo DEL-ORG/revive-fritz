@@ -73,6 +73,8 @@ pipeline {
                 sh '''
             cd $WORKSPACE/REVIVE/src/checkout/
             npm install 
+            sudo chown -R 115:122 "/.npm"
+
                 '''
             }
         }
