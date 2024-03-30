@@ -81,9 +81,9 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                dir("${WORKSPACE}/revive-fritz") {
+                dir("${WORKSPACE}/revive-fritz/develop-job/revive-fritz") {
                     script {
-                        withSonarQubeEnv('SonarScanner') {
+                        withSonarQubeEnv('sonar-scanner') {
                             sh "sonar-scanner"
                         }
                     }
