@@ -63,21 +63,21 @@ pipeline {
 
 
 
-        stage('Test maven-node') {
-	      agent {
-            docker {
-              image 'node'
-            }
-           }
-            steps {
-                sh '''
-            cd $WORKSPACE/REVIVE/src/checkout/
-            npm install
-            
+    //   stage('Test maven-node') {
+	//     agent {
+    //       docker {
+    //         image 'node'
+    //       }
+    //      }
+    //       steps {
+    //           sh '''
+    //       cd $WORKSPACE/REVIVE/src/checkout/
+    //       npm install
+    //       
 
-                '''
-            }
-        }
+    //           '''
+    //       }
+    //   }
 
         stage('SonarQube Analysis') {
             steps {
