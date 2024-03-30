@@ -66,13 +66,13 @@ pipeline {
         stage('Test maven-node') {
 	      agent {
             docker {
-              image 'node:17'
+              image 'node'
             }
            }
             steps {
                 sh '''
             cd $WORKSPACE/REVIVE/src/checkout/
-            npm run 
+            npm install
             
 
                 '''
