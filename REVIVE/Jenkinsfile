@@ -2,50 +2,48 @@ pipeline {
     agent any
 
       stages {
-    //    stage('Test golang') {
-	//      agent {
-    //        docker {
-    //          image 'golang:1.20.1'
-    //          args '-u 0:0'
-    //        }
-    //       }
-    //        steps {
-    //            sh '''
-    //        cd $WORKSPACE/REVIVE/src/catalog/
-    //        go test
-    //            '''
-    //        }
-    //    }
+       stage('Test golang') {
+	     agent {
+           docker {
+             image 'golang:1.20.1'
+             args '-u 0:0'
+           }
+          }
+           steps {
+               sh '''
+           cd $WORKSPACE/REVIVE/src/catalog/
+           go test
+               '''
+           }
+       }
 
-       //stage('Test maven-cart') {
-	   // agent {
-       //    docker {
-       //      image 'maven:3.8.7-openjdk-18'
-       //    }
-       //   }
-       //    steps {
-       //        sh '''
-       //    cd $WORKSPACE/REVIVE/src/cart/
-       //    mvn  test  -Dmaven.test.skip=true --quiet 
+       stage('Test maven-cart') {
+	    agent {
+           docker {
+             image 'maven:3.8.7-openjdk-18'
+           }
+          }
+           steps {
+               sh '''
+           cd $WORKSPACE/REVIVE/src/cart/
+           mvn  test  -Dmaven.test.skip=true --quiet
+               '''
+           }
+       
 
-       //        '''
-       //    }
-       //}
-
-
-      // stage('Test maven-orders') {
-	  //   agent {
-      //     docker {
-      //       image 'maven:3.8.7-openjdk-18'
-      //     }
-      //    }
-      //     steps {
-      //         sh '''
-      //     cd $WORKSPACE/REVIVE/src/orders/
-      //     mvn   test -Dmaven.test.skip=true --quiet 
-      //         '''
-      //     }
-      // }
+       stage('Test maven-orders') {
+	     agent {
+           docker {
+             image 'maven:3.8.7-openjdk-18'
+           }
+          }
+           steps {
+               sh '''
+           cd $WORKSPACE/REVIVE/src/orders/
+           mvn   test -Dmaven.test.skip=true --quiet 
+               '''
+           }
+       }
 
     //  stage('Test maven-ui') {
 	//    agent {
@@ -79,18 +77,29 @@ pipeline {
     //       }
     //   }
 
-        stage('SonarQube Analysis') {
-            steps {
-                dir("${WORKSPACE}/revive-fritz/develop-job/revive-fritz") {
-                    script {
-                        withSonarQubeEnv('sonar-scanner') {
-                            sh "sonar-scanner"
-                        }
+        stage('SonarQube analysis') {
+                agent {
+                    docker {
+                      image 'devopseasylearning/sonar-scanner-revive:v1.0.0'
+                    }
+                   }
+                   environment {
+            CI = 'true'
+            scannerHome='/opt/sonar-scanner'
+        }
+                steps{
+                    withSonarQubeEnv('sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
-        }
-
+        stage("Quality Gate") {
+                steps {
+                  timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                  }
+                }
+              }      
 
 
 
