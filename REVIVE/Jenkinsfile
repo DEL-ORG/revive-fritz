@@ -114,7 +114,7 @@ pipeline {
            }
             steps {
                 sh '''
-            cd $WORKSPACE/stormer-project02/src/catalog/
+            cd $WORKSPACE/REVIVE/src/catalog/
             go build   -buildvcs=false
                 '''
             }
