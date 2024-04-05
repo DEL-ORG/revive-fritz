@@ -118,8 +118,26 @@ pipeline {
             go build   -buildvcs=false
                 '''
             }
-        }
+         }
 
+         stage('Test maven-orders') {
+	       agent {
+             docker {
+               image 'maven:3.8.7-openjdk-18'
+             }
+            }
+             steps {
+                 sh '''
+             cd $WORKSPACE/REVIVE/src/orders/
+             mvn  package -Dmaven.test.skip=true --quiet 
+                 '''
+             }
+         }
+
+
+
+        
+        
               
                   
 
