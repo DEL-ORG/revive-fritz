@@ -186,7 +186,7 @@ pipeline {
       stage('Build-images-ui') {
             steps {
                 sh '''
-            cd $WORKSPACE/revive/src/ui/
+            cd $WORKSPACE/REVIVE/src/ui/
             docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
                 '''
             }
