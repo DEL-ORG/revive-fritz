@@ -186,7 +186,7 @@ pipeline {
       stage('Build-images-ui') {
             steps {
                 sh '''
-            cd $WORKSPACE/stormer-project02/src/ui/
+            cd $WORKSPACE/revive/src/ui/
             docker build -t  devopseasylearning2021/ui:jenkins-$BUILD_NUMBER .
                 '''
             }
