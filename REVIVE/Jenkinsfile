@@ -187,7 +187,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/revive/src/ui/
-            docker build -t  devopseasylearning2021/ui:jenkins-$BUILD_NUMBER .
+            docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
                 '''
             }
         }
