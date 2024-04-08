@@ -183,14 +183,32 @@ pipeline {
     // }
 
 
-      stage('Build-images-ui') {
+    //  stage('Build-images-ui') {
+    //        steps {
+    //            sh '''
+    //        cd $WORKSPACE/REVIVE/src/ui/
+    //        docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
+    //            '''
+    //        }
+    //  }
+
+
+      stage('Build-images-orders') {
             steps {
                 sh '''
-            cd $WORKSPACE/REVIVE/src/ui/
-            docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
+           cd $WORKSPACE/REVIVE/src/orders/
+           docker build  -t fridade/orders:jenkins-$BUILD_NUMBER .
+           docker build -f Dockerfile-rabbitmq  -t fridade/orders-rabbitmq:jenkins-$BUILD_NUMBER .
+           docker build -f Dockerfile-mysql  -t fridade/orders-mysql:jenkins-$BUILD_NUMBER .
                 '''
             }
         }
+
+
+
+
+
+
 
 
          
