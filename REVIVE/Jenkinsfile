@@ -120,7 +120,7 @@ pipeline {
             }
          }
 
-         stage('Test maven-orders') {
+         stage('build maven-orders') {
 	       agent {
              docker {
                image 'maven:3.8.7-openjdk-18'
@@ -133,6 +133,56 @@ pipeline {
                  '''
              }
          }
+
+
+         stage('build  maven-carts') {
+	       agent {
+             docker {
+               image 'maven:3.8.7-openjdk-18'
+             }
+            }
+             steps {
+                 sh '''
+             cd $WORKSPACE/REVIVE/src/cart/
+             mvn  package -Dmaven.test.skip=true --quiet 
+                 '''
+             }
+         }
+
+
+         stage('build maven-ui') {
+	       agent {
+             docker {
+               image 'maven:3.8.7-openjdk-18'
+             }
+            }
+             steps {
+                 sh '''
+             cd $WORKSPACE/REVIVE/src/ui/
+             mvn  package -Dmaven.test.skip=true --quiet 
+                 '''
+             }
+         }
+
+         stage('Build checkout') {
+            agent {
+                docker {
+                    image 'node' 
+                    args '-u 0:0' 
+                }
+            }
+            steps {
+                dir("${WORKSPACE}/REVIVE/src/checkout/") {
+            
+                sh '''
+                npm install
+                npm run build
+                '''
+                }
+            }
+        }
+
+         
 
 
 
