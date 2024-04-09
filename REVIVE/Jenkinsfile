@@ -227,6 +227,30 @@ pipeline {
         }
 
 
+    stage('Build-images-catalog') {
+            steps {
+                sh '''
+cd $WORKSPACE/REVIVE/src/catalog/
+docker build -t  fridade/catalog:jenkins-$BUILD_NUMBER .
+docker build -f Dockerfile-mysql -t fridade/catalog-mysql:jenkins-$BUILD_NUMBER .
+                '''
+            }
+        }
+
+stage('Build-images-assets') {
+            steps {
+                sh '''
+cd $WORKSPACE/REVIVE/src/assets/
+docker build -t  fridade/assets:jenkins-$BUILD_NUMBER .
+cd $WORKSPACE
+                '''
+            }
+        }
+
+
+
+
+
 
 
 
