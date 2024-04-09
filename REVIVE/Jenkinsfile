@@ -208,7 +208,7 @@ pipeline {
       stage('Build-images-checkout') {
             steps {
                 sh '''
-          cd $WORKSPACE/stormer-project02/src/checkout/
+          cd $WORKSPACE/REVIVE/src/checkout/
           docker build -t  fridade/orders:jenkins-$BUILD_NUMBER .
           docker build -f Dockerfile-redis  -t fridade/checkout-redis:jenkins-$BUILD_NUMBER .
                 '''
@@ -219,7 +219,7 @@ pipeline {
      stage('Build-images-cart') {
             steps {
                 sh '''
-         cd $WORKSPACE/stormer-project02/src/cart/
+         cd $WORKSPACE/REVIVE/src/cart/
          docker build -t  fridade/cart:jenkins-$BUILD_NUMBER .
          docker build -f Dockerfile-dynamodb -t fridade/cart-dynamodb:jenkins-$BUILD_NUMBER .
                 '''
