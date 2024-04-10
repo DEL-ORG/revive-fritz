@@ -274,13 +274,12 @@ pipeline {
         stage('Push-orders') {
             // Push-orders stage
             steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh '''
-                            docker push fridade/orders:jenkins-$BUILD_NUMBER 
-                            docker push fridade/orders-rabbitmq:jenkins-$BUILD_NUMBER 
-                            docker push fridade/orders-mysql:jenkins-$BUILD_NUMBER 
-                        '''
+               
+                sh '''
+                    docker push fridade/orders:jenkins-$BUILD_NUMBER 
+                    docker push fridade/orders-rabbitmq:jenkins-$BUILD_NUMBER 
+                    docker push fridade/orders-mysql:jenkins-$BUILD_NUMBER 
+                '''
                     }
                 }
             }
