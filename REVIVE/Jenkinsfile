@@ -196,15 +196,16 @@ pipeline {
     // }
 
 
-    //  stage('Build-images-ui') {
-    //        steps {
-    //            sh '''
-    //        cd $WORKSPACE/REVIVE/src/ui/
-    //        docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
-    //            '''
-    //        }
-    //  }
+    stage('Build-images-ui') {
+            steps {
+                sh '''
+            cd $WORKSPACE/REVIVE/src/ui/
+            docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
+                '''
+            }
 
+    }
+    
 
       stage('Build-images-orders') {
             steps {
