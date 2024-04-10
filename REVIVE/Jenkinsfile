@@ -196,14 +196,15 @@ pipeline {
     // }
 
 
-      stage('Build-images-ui') {
-            steps {
-                sh '''
-            cd $WORKSPACE/REVIVE/src/ui/
-            docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
-                '''
-            }
-      
+    //  stage('Build-images-ui') {
+    //        steps {
+    //            sh '''
+    //        cd $WORKSPACE/REVIVE/src/ui/
+    //        docker build -t  fridade/ui:jenkins-$BUILD_NUMBER .
+    //            '''
+    //        }
+    //  }
+
 
       stage('Build-images-orders') {
             steps {
@@ -260,83 +261,81 @@ pipeline {
             }
     
     stage('Push-ui') {
-            // Push-ui stage
+          
             steps {
-               
-               sh '''
-               docker push fridade/ui:jenkins-$BUILD_NUMBER'
-            }  '''
+               sh 'docker push fridade/ui:jenkins-$BUILD_NUMBER'
+            }
     }
             
 
-        stage('Push-orders') {
-            // Push-orders stage
-            steps {
-               
-                sh '''
-                    docker push fridade/orders:jenkins-$BUILD_NUMBER 
-                    docker push fridade/orders-rabbitmq:jenkins-$BUILD_NUMBER 
-                    docker push fridade/orders-mysql:jenkins-$BUILD_NUMBER 
-                '''
-                    }
-                }
-          
-       
+    //stage('Push-orders') {
+    //    // Push-orders stage
+    //    steps {
+    //       
+    //        sh '''
+    //            docker push fridade/orders:jenkins-$BUILD_NUMBER 
+    //            docker push fridade/orders-rabbitmq:jenkins-$BUILD_NUMBER 
+    //            docker push fridade/orders-mysql:jenkins-$BUILD_NUMBER 
+    //        '''
+    //            }
+    //        }
+    //  
+    //
 
-        stage('Push-checkout') {
-            // Push-checkout stage
-            steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh '''
-                            docker push fridade/checkout:jenkins-$BUILD_NUMBER 
-                            docker push fridade/checkout-redis:jenkins-$BUILD_NUMBER 
-                        '''
-                    }
-                }
-            }
-        }
+    //stage('Push-checkout') {
+    //    // Push-checkout stage
+    //    steps {
+    //        script {
+    //            docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+    //                sh '''
+    //                    docker push fridade/checkout:jenkins-$BUILD_NUMBER 
+    //                    docker push fridade/checkout-redis:jenkins-$BUILD_NUMBER 
+    //                '''
+    //            }
+    //        }
+    //    }
+    //}
 
-        stage('Push-cart') {
-            // Push-cart stage
-            steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh '''
-                            docker push fridade/cart:jenkins-$BUILD_NUMBER 
-                            docker push fridade/cart-dynamodb:jenkins-$BUILD_NUMBER
-                        '''
-                    }
-                }
-            }
-        }
+    //stage('Push-cart') {
+    //    // Push-cart stage
+    //    steps {
+    //        script {
+    //            docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+    //                sh '''
+    //                    docker push fridade/cart:jenkins-$BUILD_NUMBER 
+    //                    docker push fridade/cart-dynamodb:jenkins-$BUILD_NUMBER
+    //                '''
+    //            }
+    //        }
+    //    }
+    //}
 
-        stage('Push-catalog') {
-            // Push-catalog stage
-            steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh '''
-                            docker push fridade/catalog:jenkins-$BUILD_NUMBER 
-                            docker push fridade/catalog-mysql:jenkins-$BUILD_NUMBER 
-                        '''
-                    }
-                }
-            }
-        }
+    //stage('Push-catalog') {
+    //    // Push-catalog stage
+    //    steps {
+    //        script {
+    //            docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+    //                sh '''
+    //                    docker push fridade/catalog:jenkins-$BUILD_NUMBER 
+    //                    docker push fridade/catalog-mysql:jenkins-$BUILD_NUMBER 
+    //                '''
+    //            }
+    //        }
+    //    }
+    //}
 
-        stage('Push-assets') {
-            // Push-assets stage
-            steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh 'docker push fridade/assets:jenkins-$BUILD_NUMBER'
-                    }
-                }
-            }
-        }
+    //stage('Push-assets') {
+    //    // Push-assets stage
+    //    steps {
+    //        script {
+    //            docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+    //                sh 'docker push fridade/assets:jenkins-$BUILD_NUMBER'
+    //            }
+    //        }
+    //    }
+    //}
 
-    }
+    //
 
    post {
        success {
@@ -373,4 +372,5 @@ pipeline {
            "\n Build url : ${env.BUILD_URL}"
        }   
    }
+  }
 }
