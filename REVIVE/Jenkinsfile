@@ -223,7 +223,7 @@ pipeline {
             steps {
                 sh '''
           cd $WORKSPACE/REVIVE/src/checkout/
-          docker build -t  fridade/orders:jenkins-$BUILD_NUMBER .
+          docker build -t  fridade/checkout:jenkins-$BUILD_NUMBER .
           docker build -f Dockerfile-redis  -t fridade/checkout-redis:jenkins-$BUILD_NUMBER .
                 '''
             }
