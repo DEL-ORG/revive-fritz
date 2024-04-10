@@ -282,8 +282,8 @@ pipeline {
                 '''
                     }
                 }
-            }
-        }
+          
+       
 
         stage('Push-checkout') {
             // Push-checkout stage
