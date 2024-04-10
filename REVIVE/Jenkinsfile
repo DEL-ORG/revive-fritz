@@ -263,13 +263,11 @@ pipeline {
     stage('Push-ui') {
             // Push-ui stage
             steps {
-                script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh 'docker push fridade/ui:jenkins-$BUILD_NUMBER'
-                    }
-                }
+               
+               sh 'docker push fridade/ui:jenkins-$BUILD_NUMBER'
             }
-        }
+    }
+            
 
         stage('Push-orders') {
             // Push-orders stage
