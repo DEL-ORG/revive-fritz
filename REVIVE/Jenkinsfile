@@ -330,6 +330,72 @@ pipeline {
         }
     }
 
+    stage('helm-charts') {
+
+
+	      steps {
+	         
+
+	            sh '''
+                rm -rf revive-helm-chart  || true 
+                git clone https://github.com/fridade/revive-helm-chart.git
+                cd revive-helm-chart
+cat << EOF > dev-values.yaml
+       repository:
+         tag:   jenkins-$BUILD_NUMBER
+         assets:
+          image: fridade/assets
+       
+         carts:
+          image: fridade/cart
+       
+         cart_dynamodb:
+          image: fridade/cart-dynamodb
+        
+         catalog:
+          image: fridade/catalog
+       
+        
+         catalog_mysql:
+          image: fridade/catalog-mysql
+       
+         checkout:
+          image: fridade/checkout
+       
+         checkout_redis:
+          image: fridade/checkout-redis
+       
+         orders:
+          image: fridade/orders
+       
+         orders_mysql:
+          image: fridade/orders-mysql
+       
+         orders_rabbitmq:
+          image: fridade/orders-rabbitmq 
+       
+         ui:
+          image: fridade/ui
+EOF
+git config --global user.name "devopseasylearning"
+git config --global user.email "info@devopseasylearning.com"
+   cat  dev-values.yaml
+   git add -A 
+    git commit -m "Change from JENKINS" 
+    git push  https://github.com/fridade/revive-helm-chart.git
+	            '''
+	          }
+
+	        }
+
+	      
+
+	    
+
+
+    
+      
+
     
  }
 
