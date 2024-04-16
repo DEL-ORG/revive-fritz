@@ -382,7 +382,7 @@ git config --global user.email "info@devopseasylearning.com"
    cat  dev-values.yaml
    git add -A 
     git commit -m "Change from JENKINS" 
-    git push  git@github.com:fridade/revive-helm-chart.git
+    git push  
 	            '''
 	          }
 
