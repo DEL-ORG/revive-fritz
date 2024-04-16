@@ -338,7 +338,7 @@ pipeline {
 
 	            sh '''
                 rm -rf revive-helm-chart  || true 
-                git clone https://github.com/fridade/revive-helm-chart.git
+                git clone git@github.com:fridade/revive-helm-chart.git
                 cd revive-helm-chart
 cat << EOF > dev-values.yaml
        repository:
@@ -377,12 +377,12 @@ cat << EOF > dev-values.yaml
          ui:
           image: fridade/ui
 EOF
-git config --global user.name "devopseasylearning"
+git config --global user.name "fridade"
 git config --global user.email "info@devopseasylearning.com"
    cat  dev-values.yaml
    git add -A 
     git commit -m "Change from JENKINS" 
-    git push  https://github.com/fridade/revive-helm-chart.git
+    git push  git@github.com:fridade/revive-helm-chart.git
 	            '''
 	          }
 
