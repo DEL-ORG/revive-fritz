@@ -334,15 +334,14 @@ pipeline {
 
 
 	      steps {
-	         
-             script {
+	        script {
 	          withCredentials([
 	            string(credentialsId: 'Github_token', variable: 'TOKEN')
 	          ]) {
 
 	            sh '''
                 rm -rf revive-helm-chart || true 
-                git clone https://github.com/fridade/revive-helm-chart.git
+                https://github.com/fridade/revive-helm-chart.git
                 cd revive-helm-chart
 cat << EOF > dev-values.yaml
        repository:
@@ -390,21 +389,14 @@ git config --global user.email "info@fridade.com"
 	            '''
 	          }
 
-	        
-            }
-        }
+	        }
+
+	      }
+
+	    }
 
 
-	      
-
-	    
-
-
-    
-      
-
-    
- }
+    }
 
    post {
        success {
