@@ -336,7 +336,7 @@ pipeline {
 	      steps {
 	        script {
 	          withCredentials([
-	            string(credentialsId: 'Github_token', variable: 'TOKEN')
+	            string(credentialsId: 'github_token', variable: 'TOKEN')
 	          ]) {
 
 	            sh '''
