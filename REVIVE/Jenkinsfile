@@ -6,7 +6,7 @@ pipeline {
 	}
 
 
-      stages {
+    stages {
 
         stage('Login') {
 
@@ -96,7 +96,7 @@ pipeline {
     //    stage('SonarQube analysis') {
     //            agent {
     //                docker {
-    //                  image 'devopseasylearning/sonar-scanner-revive:v1.0.0'
+    //                  image 'fridade/sonar-scanner-revive:v1.0.0'
     //                }
     //               }
     //               environment {
@@ -335,9 +335,13 @@ pipeline {
 
 	      steps {
 	         
+             script {
+	          withCredentials([
+	            string(credentialsId: 'Github_token', variable: 'TOKEN')
+	          ]) {
 
 	            sh '''
-                rm -rf revive-helm-chart  || true 
+                rm -rf revive-helm-chart || true 
                 git clone https://github.com/fridade/revive-helm-chart.git
                 cd revive-helm-chart
 cat << EOF > dev-values.yaml
@@ -378,15 +382,18 @@ cat << EOF > dev-values.yaml
           image: fridade/ui
 EOF
 git config --global user.name "fridade"
-git config --global user.email "info@devopseasylearning.com"
+git config --global user.email "info@fridade.com"
    cat  dev-values.yaml
    git add -A 
     git commit -m "Change from JENKINS" 
-    git push  https://fridade:Anniemi@2@github.com/fridade/revive-helm-chart.git
+    git push  https://fridade:$TOKEN@github.com/fridade/revive-helm-chart.git
 	            '''
 	          }
 
-	        }
+	        
+            }
+        }
+
 
 	      
 
