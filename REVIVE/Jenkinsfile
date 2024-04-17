@@ -341,7 +341,7 @@ pipeline {
 
 	            sh '''
                 rm -rf revive-helm-chart || true 
-                https://github.com/fridade/revive-helm-chart.git
+                git clone https://github.com/fridade/revive-helm-chart.git
                 cd revive-helm-chart
 cat << EOF > dev-values.yaml
        repository:
