@@ -3,7 +3,7 @@ pipeline {
 
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-    }
+	}
 
 
     stages {
@@ -13,40 +13,38 @@ pipeline {
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
-		}
-
-    //  stage('Test microservice catalog') {
+		}           
+    //    stage('Test microservice catalog') {
+    //      agent {
+    //        docker {
+    //          image 'golang:1.20.1'
+    //          args '-u 0:0'
+    //        }
+    //       }
+    //        steps {
+    //            sh '''
+    //        cd $WORKSPACE/REVIVE/src/catalog/
+    //        go test
+    //            '''
+    //        }
+    //    }           
+    //   stage('Test maven-cart') {
 	//    agent {
-    //      docker {
-    //        image 'golang:1.20.1'
-    //        args '-u 0:0'
+    //       docker {
+    //         image 'maven:3.8.7-openjdk-18'
+    //       }
     //      }
-    //     }
-    //      steps {
-    //          sh '''
-    //      cd $WORKSPACE/REVIVE/src/catalog/
-    //      go test
-    //          '''
-    //      }
-    //  }
-
-    //  stage('Test maven-cart') {
-	//   agent {
-    //      docker {
-    //        image 'maven:3.8.7-openjdk-18'
-    //      }
-    //     }
-    //      steps {
-    //          sh '''
-    //      cd $WORKSPACE/REVIVE/src/cart/
-    //      mvn  test  -Dmaven.test.skip=true --quiet
-    //          '''
-    //      }
-    //  }
-    //      
-    //      
-    //  
-
+    //       steps {
+    //           sh '''
+    //       cd $WORKSPACE/REVIVE/src/cart/
+    //       mvn  test  -Dmaven.test.skip=true --quiet
+    //           '''
+    //       }
+    //   }
+    //       
+    //       
+    //   
+//
     //  stage('Test maven-orders') {
 	//    agent {
     //      docker {
@@ -60,7 +58,7 @@ pipeline {
     //          '''
     //      }
     //  }
-
+    //  
     //  stage('Test maven-ui') {
 	//    agent {
     //      docker {
@@ -73,10 +71,9 @@ pipeline {
     //      mvn  test -Dmaven.test.skip=true --quiet 
     //          '''
     //      }
+//
     //  }
-
-
-
+    //  
     //   stage('Test maven-node') {
 	//     agent {
     //       docker {
@@ -87,12 +84,11 @@ pipeline {
     //           sh '''
     //       cd $WORKSPACE/REVIVE/src/checkout/
     //       npm install
-    //       
-
+    //      
     //           '''
     //       }
     //   }
-
+//
     //    stage('SonarQube analysis') {
     //            agent {
     //                docker {
@@ -118,83 +114,76 @@ pipeline {
     //          } 
 //
 
-    //     stage('Build golang') {
-	//      agent {
-    //        docker {
-    //          image 'golang'
-    //          args '-u 0:0'
-    //        }
-    //       }
-    //        steps {
-    //            sh '''
-    //        cd $WORKSPACE/REVIVE/src/catalog/
-    //        go build   -buildvcs=false
-    //            '''
-    //        }
-    //     }
-//
-    //     stage('build maven-orders') {
-	//       agent {
-    //         docker {
-    //           image 'maven:3.8.7-openjdk-18'
-    //         }
-    //        }
-    //         steps {
-    //             sh '''
-    //         cd $WORKSPACE/REVIVE/src/orders/
-    //         mvn  package -Dmaven.test.skip=true --quiet 
-    //             '''
-    //         }
-    //     }
-//
-//
-    //     stage('build  maven-carts') {
-	//       agent {
-    //         docker {
-    //           image 'maven:3.8.7-openjdk-18'
-    //         }
-    //        }
-    //         steps {
-    //             sh '''
-    //         cd $WORKSPACE/REVIVE/src/cart/
-    //         mvn  package -Dmaven.test.skip=true --quiet 
-    //             '''
-    //         }
-    //     }
-//
-//
-    //     stage('build maven-ui') {
-	//       agent {
-    //         docker {
-    //           image 'maven:3.8.7-openjdk-18'
-    //         }
-    //        }
-    //         steps {
-    //             sh '''
-    //         cd $WORKSPACE/REVIVE/src/ui/
-    //         mvn  package -Dmaven.test.skip=true --quiet 
-    //             '''
-    //         }
-    //     }
-//
-    //  stage('Build checkout') {
-    //     agent {
-    //         docker {
-    //             image 'node' 
-    //             args '-u 0:0' 
-    //         }
-    //     }
-    //     steps {
-    //         dir("${WORKSPACE}/REVIVE/src/checkout/") {
-    //     
-    //         sh '''
-    //         npm install
-    //         npm run build
-    //         '''
-    //         }
-    //     }
-    // }
-
+  //      stage('Build microservice catalog ') {//
+	     agent {
+  //         docker {
+  //           image 'golang'
+  //           args '-u 0:0'
+  //         }
+  //        }
+  //         steps {
+  //             sh '''
+  //         cd $WORKSPACE/REVIVE/src/catalog/
+  //         go build   -buildvcs=false
+  //             '''
+  //         }
+  //      }
+  //      stage('build maven-orders') {//
+  //	      agent {
+  //          docker {
+  //            image 'maven:3.8.7-openjdk-18'
+  //          }
+  //         }
+  //          steps {
+  //              sh '''
+  //          cd $WORKSPACE/REVIVE/src/orders/
+  //          mvn  package -Dmaven.test.skip=true --quiet 
+  //              '''
+  //          }
+  //      }
+  //      stage('build  maven-carts') {//
+  //	      agent {
+  //          docker {
+  //            image 'maven:3.8.7-openjdk-18'
+  //          }
+  //         }
+  //          steps {
+  //              sh '''
+  //          cd $WORKSPACE/REVIVE/src/cart/
+  //          mvn  package -Dmaven.test.skip=true --quiet 
+  //              '''
+  //          }
+  //      }
+  //      stage('build maven-ui') {//
+  //	      agent {
+  //          docker {
+  //            image 'maven:3.8.7-openjdk-18'
+  //          }
+  //         }
+  //          steps {
+  //              sh '''
+  //          cd $WORKSPACE/REVIVE/src/ui/
+  //          mvn  package -Dmaven.test.skip=true --quiet 
+  //              '''
+  //          }
+  //      }
+  //   stage('Build checkout') {
+  //      agent {
+  //          docker {
+  //              image 'node' 
+  //              args '-u 0:0' 
+  //          }
+  //      }
+  //      steps {
+  //          dir("${WORKSPACE}/REVIVE/src/checkout/") {
+  //      
+  //          sh '''
+  //          npm install
+  //          npm run build
+  //          '''
+  //          }
+  //      }
+ //   
 
     stage('Build-images-ui') {
             steps {
@@ -383,7 +372,7 @@ EOF
 git config --global user.name "fridade"
 git config --global user.email "info@fridade.com"
    cat  dev-values.yaml
-   git pull
+   
    git add -A 
     git commit -m "Change from JENKINS" 
     git push  https://fridade:$TOKEN@github.com/fridade/revive-helm-chart.git
@@ -435,4 +424,5 @@ git config --global user.email "info@fridade.com"
        }   
    
   }
+}
 }
