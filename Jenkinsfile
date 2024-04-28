@@ -423,6 +423,5 @@ git config --global user.email "info@fridade.com"
            "\n Build url : ${env.BUILD_URL}"
        }   
    
-  }
-}
+    }
 }
