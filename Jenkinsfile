@@ -115,7 +115,7 @@ pipeline {
 //
 
   //      stage('Build microservice catalog ') {//
-	     agent {
+//	        agent {
   //         docker {
   //           image 'golang'
   //           args '-u 0:0'
